@@ -1,20 +1,20 @@
-# rlibm-32
+# RLIBM-32
 
-rlibm-32 is both a math library that provides correctly rounded result for all inputs and tools used to generate the correct polynomials. The techniques behind the tools will be appearing at PLDI 2021. Currently, rlibm-32 supports a number of elementary functions for float and posit32 representations. 
+RLIBM-32 is both a math library that provides correctly rounded result for all inputs and tools used to generate the correct polynomials. The techniques behind the tools will be appearing at PLDI 2021. Currently, rlibm-32 supports a number of elementary functions for float and posit32 representations. 
 
-### List of float functions supported by rlibm-32
+### List of float functions supported by RLIBM-32
 1. log(x), log2(x), log10(x)
 2. exp(x), exp2(x), exp10(x)
 3. sinh(x), cosh(x)
 4. sinpi(x), cospi(x)
 
-### List of posit32 functions supported by rlibm-32
+### List of posit32 functions supported by RLIBM-32
 1. log(x), log2(x), log10(x)
 2. exp(x), exp2(x), exp10(x)
 3. sinh(x), cosh(x)
 
 
-# How to build and use rlibm-32 math library
+# How to build and use RLIBM-32 math library
 
 ### Prerequisite
 If you want to compile the math library for posit32, you have to install SoftPosit. Please follow the instructions from the [SoftPosit GitLab](https://gitlab.com/cerlane/SoftPosit).
@@ -139,7 +139,7 @@ cd testing/float/glibc_rlibm_O3_flags
 ```
 
 
-# How to use Rlibm-32 tool to generate polynomials
+# How to use RLIBM-32 tool to generate polynomials
 WIP
 
 
