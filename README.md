@@ -1,6 +1,18 @@
 # rlibm-32
 
-rlibm-32 is both a math library that provides correctly rounded result for all inputs and a tool that generates correct polynomials. Currently, rlibm-32 supports a number of elementary functions for float and posit32 representations. 
+rlibm-32 is both a math library that provides correctly rounded result for all inputs and tools used to generate the correct polynomials. The techniques behind the tools will be appearing at PLDI 2021. Currently, rlibm-32 supports a number of elementary functions for float and posit32 representations. 
+
+### List of float functions supported by rlibm-32
+1. log(x), log2(x), log10(x)
+2. exp(x), exp2(x), exp10(x)
+3. sinh(x), cosh(x)
+4. sinpi(x), cospi(x)
+
+### List of posit32 functions supported by rlibm-32
+1. log(x), log2(x), log10(x)
+2. exp(x), exp2(x), exp10(x)
+3. sinh(x), cosh(x)
+
 
 # How to build and use rlibm-32 math library
 
