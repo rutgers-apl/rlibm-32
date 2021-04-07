@@ -19,7 +19,7 @@ all: $(libDir)/floatMathLib.a $(libDir)/posit32MathLib.a
 
 $(floatObjDir)/%.o: $(floatSrcDir)/%.c
 	@mkdir -p $(floatObjDir)
-	$(CC) -static -std=c11 -O3 -c $^ -Iinclude/ -o $@
+	$(CC) -std=c11 -O3 -c $^ -Iinclude/ -o $@
 
 $(libDir)/floatMathLib.a: $(floatObj)
 	@mkdir -p $(libDir)
@@ -27,7 +27,7 @@ $(libDir)/floatMathLib.a: $(floatObj)
 
 $(p32ObjDir)/%.o: $(p32SrcDir)/%.c
 	@mkdir -p $(p32ObjDir)
-	$(CC) -static \
+	$(CC) \
 	-L${HOME}/bin/usr/lib64 \
 	-L${HOME}/bin/lib64 \
 	-I${HOME}/bin/include \
