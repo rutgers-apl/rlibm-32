@@ -1,6 +1,10 @@
 # rlibm-32
 
-rlibm-32 is a math library that provides correctly rounded result for all inputs. Currently, rlibm-32 supports a number of elementary functions for float and posit32 representations. 
+rlibm-32 is both a math library that provides correctly rounded result for all inputs and a tool that generates correct polynomials. Currently, rlibm-32 supports a number of elementary functions for float and posit32 representations. 
+
+<details><summary>How to use rlibm-32 math library</summary>
+  
+<\details>
 
 ## Installation
 To compile the math library, please follow the instructions below.
