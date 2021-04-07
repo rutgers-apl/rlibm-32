@@ -1,0 +1,10 @@
+./rlibm/Cosh Result/rlibm/Cosh.txt
+./rlibm/Cospi Result/rlibm/Cospi.txt
+./rlibm/Exp Result/rlibm/Exp.txt
+./rlibm/Exp2 Result/rlibm/Exp2.txt
+./rlibm/Exp10 Result/rlibm/Exp10.txt
+./rlibm/Log Result/rlibm/Log.txt
+./rlibm/Log2 Result/rlibm/Log2.txt
+./rlibm/Log10 Result/rlibm/Log10.txt
+./rlibm/Sinh Result/rlibm/Sinh.txt
+./rlibm/Sinpi Result/rlibm/Sinpi.txt
