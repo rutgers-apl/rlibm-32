@@ -1,0 +1,2 @@
+./Cosh ../../intervals/FloatCoshData Cosh.log Cosh.h
+./Sinh ../../intervals/FloatSinhData Sinh.log Sinh.h

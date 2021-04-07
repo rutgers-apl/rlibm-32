@@ -1,0 +1,8 @@
+./Log10 Posit32Log10Data
+./Log Posit32LogData
+./Log2 Posit32Log2Data
+./Exp Posit32ExpData
+./Exp2 Posit32Exp2Data
+./Exp10 Posit32Exp10Data
+./Sinh Posit32SinhForSinhData Posit32CoshForSinhData
+./Cosh Posit32SinhForCoshData Posit32CoshForCoshData

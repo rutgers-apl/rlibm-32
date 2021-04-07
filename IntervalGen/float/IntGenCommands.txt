@@ -1,0 +1,10 @@
+./Log10 FloatLog10Data
+./Log FloatLogData
+./Log2 FloatLog2Data
+./Exp FloatExpData
+./Exp2 FloatExp2Data
+./Exp10 FloatExp10Data
+./Cosh FloatSinhForCoshData FloatCoshForCoshData
+./Sinh FloatSinhForSinhData FloatCoshForSinhData
+./Cospi FloatSinpiForCospiData FloatCospiForCospiData
+./Sinpi FloatSinpiForSinpiData FloatCospiForSinpiData

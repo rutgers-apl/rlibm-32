@@ -1,0 +1,30 @@
+#!/bin/bash
+echo -e "GLIBC RLIBM -O3 -frounding-math -fsignaling-nans"
+make -s clean
+make -s
+
+echo -e "Log"
+taskset -c 12 ./Log ${ORACLEPOSITPATH}/LogOracle
+
+echo -e "Log2"
+taskset -c 12 ./Log2 ${ORACLEPOSITPATH}/Log2Oracle
+
+echo -e "Log10"
+taskset -c 12 ./Log10 ${ORACLEPOSITPATH}/Log10Oracle
+
+echo -e "Exp"
+taskset -c 12 ./Exp ${ORACLEPOSITPATH}/ExpOracle
+
+echo -e "Exp2"
+taskset -c 12 ./Exp2 ${ORACLEPOSITPATH}/Exp2Oracle
+
+echo -e "Exp10"
+taskset -c 12 ./Exp10 ${ORACLEPOSITPATH}/Exp10Oracle
+
+echo -e "Sinh"
+taskset -c 12 ./Sinh ${ORACLEPOSITPATH}/SinhOracle
+
+echo -e "Cosh2"
+taskset -c 12 ./Cosh ${ORACLEPOSITPATH}/CoshOracle
+
+make -s clean

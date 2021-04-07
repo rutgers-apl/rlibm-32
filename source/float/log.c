@@ -16,7 +16,7 @@ float rlibm_log(float x) {
         }
         
         if (fix.x > 0x7FFFFFFF) { // Log(-val) = NaN
-            return (x-x) / 0;
+            return (x - x) / 0;
             
         }
         
