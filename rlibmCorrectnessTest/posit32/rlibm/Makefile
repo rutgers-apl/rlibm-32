@@ -2,7 +2,7 @@ objects = log2 log log10 exp2 exp exp10 sinh cosh
 
 all: $(objects)
 
-$(objects): %: %.cpp
+$(objects): %: %.c
 	gcc -O3 -std=c++11 $^ -lm -lmpfr -lgmp ../../../lib/posit32MathLib.a $(SOFTPOSITPATH)/build/Linux-x86_64-GCC/softposit.a  -I$(SOFTPOSITPATH)/source/include -I../../../include/ -o $@
 
 
