@@ -100,6 +100,8 @@ void RunCorrectnessTest(char const* FunctionName, char* resFileName) {
     unsigned int maxUlpDMlib = 0;
     posit32_t maxXRlibm;
     posit32_t maxXDMlib;
+    
+    FILE* f = fopen(resFileName, "w");
 
     posit32_t x;
     for (count = 0; count < 0x100000000; count++) {
@@ -125,9 +127,7 @@ void RunCorrectnessTest(char const* FunctionName, char* resFileName) {
             }
         }
     }
-    
-    FILE* f = fopen(resFileName, "w");
-    
+        
     fprintf(f, "\n\n%s TEST RESULT:\n", FunctionName);
     if (wrongRlibmCount == 0) {
         fprintf(f, "RLIBM returns correct result for all inputs\n");
