@@ -2,61 +2,40 @@
 
 rlibm-32 is both a math library that provides correctly rounded result for all inputs and a tool that generates correct polynomials. Currently, rlibm-32 supports a number of elementary functions for float and posit32 representations. 
 
-<details><summary>How to use rlibm-32 math library</summary>
-  
-<\details>
-
-## Installation
-To compile the math library, please follow the instructions below.
-This compilation instruction conrates separate math library for each of the available representations.
+# How to build and use rlibm-32 math library
 
 ### Prerequisite
 If you want to compile the math library for posit32, you have to install SoftPosit. Please follow the instructions from the [SoftPosit GitLab](https://gitlab.com/cerlane/SoftPosit).
 
-### Installation step
-1. Clone the rlibm-32 repository
-```
-git clone https://github.com/rutgers-apl/rlibm-32.git
-```
+### Setup
 
-2. Create an environment variable SOFTPOSITPATH that points to the directory of SoftPosit:
+1. Create an environment variable SOFTPOSITPATH that points to the directory of SoftPosit:
 ```
 export SOFTPOSITPATH=<path-to-softposit-directory>
 ```
   
-3. Build the math library
-  1. If you want to build all the math libraries, simply use make rule
+2. Build the math library
+  1. If you want to build all the math libraries, simply use make rule from the root directory
   ```
-  cd rlibm-32
+  cd <path-to-rlibm-32>
   make
   ```
 
   2. If you want to build math libraries for each representation separately, you can use these make rule
   ```
-  cd rlibm-32
+  cd <path-to-rlibm-32>
   make floatmlib
   make posit32mlib
   ```
-4. (Optional) Test that the math library does produce the correct value. This step requires MPFR installed.
-  1. To run the correctness bench suite for all math libraries, run
-  ```
-  ./runLibTest.sh
-  ```
-  2. The correctness bench suite for math library is located in the libtest folder.
-  ```
-  cd libtest/float
-  make
-  ./runAll.sh
-  ```
-
-## USAGE
-The math library will be located in the lib directory.
+  
+### USAGE
+The math library will be located in the `lib` directory.
   * floatMathLib.a : math library for float
   * posit32MathLib.a : math library for posit32.
 
 The header files for each library is located in the include directory:
-  * float_math.h : header for float math library
-  * posit32_math.h : header for posit32 math library
+  * `float_math.h` : header for float math library
+  * `posit32_math.h` : header for posit32 math library
 
 You can use our library in the code similar to how standard math library is used, except our function names start with "rlibm_":
 ```
@@ -70,6 +49,85 @@ int main() {
 
 To build the program, include the math library in the compilation command:
 ```
-g++ test.cpp ../../lib/floatMathLib.a -lm -o test
+g++ test.cpp -I<path-to-rlibm-32>/include/ <path-to-rlibm-32>/lib/floatMathLib.a -lm -o test
 ```
-Currently, rlibm uses some functions from the default math library for range reduction, such as to decompose a floating point value into the integral part and fractional part.
+Currently, rlibm uses some functions from the default math library for range reduction (i.e., to decompose a floating point value into the integral part and fractional part) so make sure to include `-lm` flag.
+
+
+# Testing Correctness and Performance
+
+### Prerequisite
+To run the testing script to check for correctness and performance, we recommend to also install Intel compiler (icc) via [this site ]{https://software.intel.com/content/www/us/en/develop/tools/oneapi/hpc-toolkit/download.html}.
+
+1. Select the appropriate operating system
+2. Select "Web & Local" distribution option
+3. Select Online installer
+4. On the right hand side (gray background) if you scroll down, it will show the steps to install. 
+  * If your OS is Linux base, then you might use the command:
+```
+wget https://registrationcenter-download.intel.com/akdlm/irc_nas/17427/l_HPCKit_p_2021.1.0.2684.sh
+bash l_HPCKit_p_2021.1.0.2684.sh
+```
+
+5. Follow the instruction. The installer will guide you through installing intel compiler.
+  a. Make sure to install "Intel® oneAPI DPC++/C++ Compiler & Intel® C++ Compiler Classic." You can choose to not install any other components
+  b. Make sure to remember the Installation directory
+  c. If it shows you any warning about requiring the "Base toolkit" you can choose to ignore it.
+    * The installation will take roughly 5~10 minutes.
+
+6. Once installation is complete, run script to set variables:
+```
+cd <path to intel oneAPI directory>
+. setvars.sh
+```
+
+### Setup
+
+1. Create an environment variable ICCPATH that points to the directory of intel/oneapi directory. If you did not change the installation path while installing Intel compiler, then the path to Intel oneAPI directory will most likely end with "intel/oneapi":
+```
+export ICCPATH=<path to Intel oneAPI directory>
+```
+
+2. To run the testing harness, we must first generate files containing oracle results. To generate oracle files for 32-bit float functions, 
+```
+export ORACLEPATH=<path to directory where you want to store oracle files for float functions>
+cd <path to rlibm-32 directory>
+cd GenerateOracleFiles/float
+./runAll.sh
+```
+  * This step creates a number of <function name>Oracle files inside `ORACLEPATH`. Each oracle file is 16GB(4 bytes * 2^32) and there are 10 functions which requires a total of 160GB. This step will take roughly 1 hour.
+
+3. To generate oracle files for 32-bit float functions, 
+```
+export ORACLEPOSITPATH=<path to directory where you want to store oracle files for posit32 functions>
+cd <path to rlibm-32 directory>
+cd GenerateOracleFiles/posit32
+./runAll.sh
+```
+  * This step creates a number of <function name>Oracle files inside `ORACLEPOSITPATH`. Each oracle file is 16GB(4 bytes * 2^32) and there are 9 functions which requires a total of 128GB. This step will take roughly 1 hour.
+
+
+### TESTING
+* To run a comprehensive testing suite, which tests the performance and correctness of glibc, intel, CR-LIBM, MetaLibm, and rlibm-32 for float functions, use the pre-assembled testing script:
+```
+cd <path to rlibm-32 directory>
+./runTestFloat.sh
+./runTestPosit.sh
+```
+
+* Each test will output two lines of result. 
+  1. The first line reports the number of cycles required to compute the function for all 2^32 inputs. Thus, to compute the average, you can use the reported number and divide by 2^32. 
+  2. The second number reports the number of inputs that produce wrong results.
+
+* Individual testing configuration (glibc, intel, CR-LIBM, MetaLibm, *or* rlibm-32) is stored in its own directory in `testing/float/` (for float functions) or `testing/posit32/` (for posit32 functions). For example, if you want to test the correctness and performance of rlibm-32's float functions built with gcc, you can use the following commands:
+```
+cd <path to rlibm-32 directory>
+cd testing/float/glibc_rlibm_O3_flags
+./runAll.sh
+```
+
+
+# How to use Rlibm-32 tool to generate polynomials
+WIP
+
+
