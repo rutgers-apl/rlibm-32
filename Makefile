@@ -26,17 +26,17 @@ $(libDir)/floatMathLib.a: $(floatObj)
 	ar rc $@ $^
 
 $(p32ObjDir)/%.o: $(p32SrcDir)/%.c
-        @mkdir -p $(p32ObjDir)
-        $(CC) -static \
-        -L${HOME}/bin/usr/lib64 \
-        -L${HOME}/bin/lib64 \
-        -I${HOME}/bin/include \
-        -I${HOME}/bin/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include \
-        -std=c11 -O3 -c $^ -Iinclude/ -I$(SOFTPOSITPATH)/source/include -o $@
+	@mkdir -p $(p32ObjDir)
+	$(CC) -static \
+	-L${HOME}/bin/usr/lib64 \
+	-L${HOME}/bin/lib64 \
+	-I${HOME}/bin/include \
+	-I${HOME}/bin/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include \
+	-std=c11 -O3 -c $^ -Iinclude/ -I$(SOFTPOSITPATH)/source/include -o $@
 
 $(libDir)/posit32MathLib.a: $(p32Obj)
-        @mkdir -p $(libDir) 
-        ar rc  $@ $^ $(SOFTPOSITPATH)/build/Linux-x86_64-GCC/softposit.a
+	@mkdir -p $(libDir) 
+	ar rc  $@ $^ $(SOFTPOSITPATH)/build/Linux-x86_64-GCC/softposit.a
 
 floatmlib: $(libDir)/floatMathLib.a
 
