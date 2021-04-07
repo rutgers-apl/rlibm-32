@@ -1,6 +1,4 @@
-objects = 	Log \
-		Log2 \
-		Log10
+objects = Log Log2 Log10 Exp Exp2 Exp10 CoshForCosh SinhForCosh CoshForSinh SinhForSinh
 
 CC=g++
 
