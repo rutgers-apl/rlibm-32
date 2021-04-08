@@ -75,6 +75,7 @@ unsigned int m_ulpf(float x, float y) {
 }
 
 void RunCorrectnessTest(char const* FunctionName, char* resFileName) {
+    int printcount = 0;
     mpfr_init2(mval, MPFR_PREC);
 
     unsigned long wrongRlibmCount = 0;
@@ -97,6 +98,13 @@ void RunCorrectnessTest(char const* FunctionName, char* resFileName) {
         
         // Otherwise check if the output is correct
         if (bres != bmy) {
+            
+            if (printcount < 10) {
+                fprintf(f, "count = %lu\n", count);
+                fprintf(f, "bres = %.100e\n", convertP32ToDouble(bres));
+                fprintf(f, "bmy  = %.100e\n", convertP32ToDouble(bmy));
+                printcount++;
+            }
             wrongRlibmCount++;
             unsigned int error = m_ulpf(bres, bmy);
             if (error > maxUlpRlibm) {
