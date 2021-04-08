@@ -204,3 +204,34 @@ Set environment variables to SoftPosit and Soplex:
 $ export SOFTPOSITPATH=<path to SoftPosit directory>
 $ export SOPLEXPATH=<path to soplex-4.0.1 directory>
 ```
+
+### Generating Polynomials
+There are two steps in generating polynomials: (1) Generating files containing reduced input and reduced intervals. (2) Based on the files, generate polynomials that produce results that satisfy the reduced input - interval constraints. Please note that the files containing reduced inputs and intervals are large. In extreme cases (i.e., exp10(x) for posit32), this file can be as large as ~80GB. Additionally, both the files and polynomials can take several hours (up to 24 hours for each function).
+
+1. If you have more than 500GB of space, then you can use the existing script that automatically generates the files and polynomial. To produce the polynomials for float, use the following command:
+```
+cd <path to rlibm-32 directory>
+./floatIntervalGen.sh
+./floatFunctionGen.sh
+```
+The first script generates the files containing reduced inputs and intervals and puts it into the `intervals` directory. The second script generates correct polynomials for each function based on the generated files. The coefficients of the polynomials are saved into header files (`*.h`) in `functiongen/float` directory.
+
+To produce the polynomials for posit32, use the following command:
+```
+cd <path to rlibm-32 directory>
+./posit32FunctionGen.sh
+./posit32IntervalGen.sh
+```
+
+The first script generates the files containing reduced inputs and intervals and puts it into the `intervals` directory. The second script generates correct polynomials for each function based on the generated files. The coefficients of the polynomials are saved into header files (`*.h`) in `functiongen/posit32` directory.
+
+2. If you would like to generate polynomials for each function separately (to save space, etc) then follow the next instructions. We will use an example of generating the polynomials for ln(x) for float type. Other functions/types should be adjusted accordingly:
+  1. 
+
+
+
+
+
+
+
+
