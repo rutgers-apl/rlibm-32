@@ -178,7 +178,29 @@ cd testing/float/glibc_rlibm_O3_flags
 ```
 
 
-# How to use RLIBM-32 tool to generate polynomials
-WIP
+# How to use RLIBM-32 Tool to Generate Polynomials
 
+### Prerequisite
+1. *SoftPosit:* Please follow the instructions from the [SoftPosit GitLab](https://gitlab.com/cerlane/SoftPosit).
+2. *Soplex 4.0.1:* Please download soplex-4.0.1 from https://soplex.zib.de/index.php#download
+* Make sure that you're downloading version 4.0.1
+```
+$ tar -xvf soplex-4.0.1.tar
+$ cd soplex-4.0.1
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
+$ cd ../..
+```
+3. MPFR library, and zlib library (required from soplex). On Ubuntu systems, they can be installed with:
+```
+sudo apt-get install build-essential libgmp3-dev libmpfr-dev zlib1g zlib1g-dev
+```
 
+### Setup
+Set environment variables to SoftPosit and Soplex:
+```
+$ export SOFTPOSITPATH=<path to SoftPosit directory>
+$ export SOPLEXPATH=<path to soplex-4.0.1 directory>
+```
