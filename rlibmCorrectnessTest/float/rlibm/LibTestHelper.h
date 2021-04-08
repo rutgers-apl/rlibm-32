@@ -83,6 +83,8 @@ void RunCorrectnessTest(char const* FunctionName, char* resFileName) {
 
     unsigned int maxUlpRlibm = 0;
     float maxXRlibm = 0;
+    
+    FILE* f = fopen(resFileName, "w");
 
     float x;
     floatX xbase;
@@ -113,8 +115,6 @@ void RunCorrectnessTest(char const* FunctionName, char* resFileName) {
             }
         }
     }
-    
-    FILE* f = fopen(resFileName, "w");
     
     fprintf(f, "%s TEST RESULT:\n", FunctionName);
     if (wrongRlibmCount == 0) {
