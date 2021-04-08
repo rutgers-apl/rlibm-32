@@ -226,9 +226,22 @@ cd <path to rlibm-32 directory>
 The first script generates the files containing reduced inputs and intervals and puts it into the `intervals` directory. The second script generates correct polynomials for each function based on the generated files. The coefficients of the polynomials are saved into header files (`*.h`) in `functiongen/posit32` directory.
 
 2. If you would like to generate polynomials for each function separately (to save space, etc) then follow the next instructions. We will use an example of generating the polynomials for ln(x) for float type. Other functions/types should be adjusted accordingly:
-  1. 
-
-
+  a. Generate file containing reduced inputs/intervals information:
+    ```
+    cd <path to rlibm-32 directory>
+    cd IntervalGen/float
+    make
+    ./Log10 FloatLog10Data
+    ```
+  b. Once the process finishes, use `FloatLog10Data` to generate the polynomial:
+    ```
+    cd <path to rlibm-32 directory>
+    cd functiongen/float/
+    make
+    ./Log ../../IntervalGen/float/FloatLogData Log.log Log.h
+    ```
+   * The program requires three arguments. (1) The reduced inputs/intervals file, (2) A filename where the program writes logging information, and (3) A filename for the header file where the polynomial coefficients are stored.
+   * Once the process finishes, `Log.h` can be found in `functiongen/float` and it will contain coefficients of the polynomials.
 
 
 
