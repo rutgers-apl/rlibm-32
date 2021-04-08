@@ -20,6 +20,6 @@ int main(int argc, char** argv) {
         exit(0);
     }
     
-    RunCorrectnessTest("Float - Sinpi", argv[1]);
+    RunCorrectnessTest("Float - Cospi", argv[1]);
     return 0;
 }

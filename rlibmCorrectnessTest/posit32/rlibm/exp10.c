@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
         exit(0);
     }
     
-    RunCorrectnessTest("Posit32 - Exp2", argv[1]);
+    RunCorrectnessTest("Posit32 - Exp10", argv[1]);
     
     return 0;
 }
