@@ -1,6 +1,6 @@
 # RLIBM-32
 
-RLIBM-32 is both a math library that provides correctly rounded result for all inputs and tools used to generate the correct polynomials. The techniques behind the tools will be appearing at PLDI 2021. Currently, rlibm-32 supports a number of elementary functions for float and posit32 representations. 
+RLIBM-32 is both a math library that provides correctly rounded result for all inputs and tools used to generate the correct polynomials. The techniques behind the tools will be appearing at PLDI 2021. Currently, RLIBM-32 supports a number of elementary functions for float and posit32 representations. 
 
 ### List of float functions supported by RLIBM-32
 1. log(x), log2(x), log10(x)
@@ -63,13 +63,52 @@ To build the program, include the math library in the compilation command:
 ```
 g++ test.cpp -I<path-to-rlibm-32>/include/ <path-to-rlibm-32>/lib/floatMathLib.a -lm -o test
 ```
-Currently, rlibm uses some functions from the default math library for range reduction (i.e., to decompose a floating point value into the integral part and fractional part) so make sure to include `-lm` flag.
+Currently, RLIBM-32 uses some functions from the default math library for range reduction (i.e., to decompose a floating point value into the integral part and fractional part) so make sure to include `-lm` flag.
 
-
-# Testing Correctness and Performance
+# Testing Correctness of RLIBM-32
 
 ### Prerequisite
-To run the testing script to check for correctness and performance, we recommend to also install Intel compiler (icc) via [this site ]{https://software.intel.com/content/www/us/en/develop/tools/oneapi/hpc-toolkit/download.html}.
+To run the testing script to check for correctness of RLIBM-32, you need to have installed MPFR and SoftPosit. SoftPosit can be installed via the instructions from the [SoftPosit GitLab](https://gitlab.com/cerlane/SoftPosit).
+
+### Setup
+
+1. Create an environment variable SOFTPOSITPATH that points to the directory of SoftPosit:
+```
+export SOFTPOSITPATH=<path-to-softposit-directory>
+```
+  
+2. Build the math library
+```
+cd <path-to-rlibm-32>
+make
+```
+
+### Testing
+1. To test the correctness of RLIBM-32's float functions, use the following command:
+```
+cd <path-to-rlibm-32>
+cd rlibmCorrectnessTest/float/
+./runAllParallel.sh -j <parallelism>
+```
+* Because the testing harness relies on MPFR math library to compute the correct result, the scripts can take hours to complete. In extreme case (sinpi(x)), it can take up to 24 hours to complete. Since there are a total of 10 float functions, we recommend parallelism of at least 4.
+
+* Once the testing harness is complete, the results will be stored in `rlibmCorrectnessTest/float/Results/rlibm/` directory. 
+
+2. To test the correctness of RLIBM-32's float functions, use the following command:
+```
+cd <path-to-rlibm-32>
+cd rlibmCorrectnessTest/posit32/
+./runAllParallel.sh -j <parallelism>
+```
+* Because the testing harness relies on MPFR math library to compute the correct result, the scripts can take hours to complete. In extreme case (exp10(x)), it can take up to 12 hours to complete. Since there are a total of 8 float functions, we recommend parallelism of at least 4.
+
+* Once the testing harness is complete, the results will be stored in `rlibmCorrectnessTest/posit32/Results/rlibm/` directory. 
+
+
+# Testing Performance of Various Math Libraries
+
+### Prerequisite
+To run the testing script to check for performance, we recommend to also install Intel compiler (icc) via [this site ](https://software.intel.com/content/www/us/en/develop/tools/oneapi/hpc-toolkit/download.html).
 
 1. Select the appropriate operating system
 2. Select "Web & Local" distribution option
@@ -120,7 +159,7 @@ cd GenerateOracleFiles/posit32
 
 
 ### TESTING
-* To run a comprehensive testing suite, which tests the performance and correctness of glibc, intel, CR-LIBM, MetaLibm, and rlibm-32 for float functions, use the pre-assembled testing script:
+* To run a comprehensive testing suite, which tests the performance and correctness of glibc, intel, CR-LIBM, MetaLibm, and RLIBM-32 for float functions, use the pre-assembled testing script:
 ```
 cd <path to rlibm-32 directory>
 ./runTestFloat.sh
@@ -131,7 +170,7 @@ cd <path to rlibm-32 directory>
   1. The first line reports the number of cycles required to compute the function for all 2^32 inputs. Thus, to compute the average, you can use the reported number and divide by 2^32. 
   2. The second number reports the number of inputs that produce wrong results.
 
-* Individual testing configuration (glibc, intel, CR-LIBM, MetaLibm, *or* rlibm-32) is stored in its own directory in `testing/float/` (for float functions) or `testing/posit32/` (for posit32 functions). For example, if you want to test the correctness and performance of rlibm-32's float functions built with gcc, you can use the following commands:
+* Individual testing configuration (glibc, intel, CR-LIBM, MetaLibm, *or* RLIBM-32) is stored in its own directory in `testing/float/` (for float functions) or `testing/posit32/` (for posit32 functions). For example, if you want to test the correctness and performance of RLIBM-32's float functions built with gcc, you can use the following commands:
 ```
 cd <path to rlibm-32 directory>
 cd testing/float/glibc_rlibm_O3_flags
