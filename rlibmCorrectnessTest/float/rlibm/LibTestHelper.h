@@ -101,8 +101,8 @@ void RunCorrectnessTest(char const* FunctionName, char* resFileName) {
             
             if (printcount < 10) {
                 fprintf(f, "count = %lu\n", count);
-                fprintf(f, "bres = %.100e\n", convertP32ToDouble(bres));
-                fprintf(f, "bmy  = %.100e\n", convertP32ToDouble(bmy));
+                fprintf(f, "bres = %.100e\n", bres);
+                fprintf(f, "bmy  = %.100e\n", bmy);
                 printcount++;
             }
             wrongRlibmCount++;
