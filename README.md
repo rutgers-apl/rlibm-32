@@ -95,14 +95,14 @@ cd rlibmCorrectnessTest/float/
 
 * Once the testing harness is complete, the results will be stored in `rlibmCorrectnessTest/float/Results/rlibm/` directory. 
 
-2. To test the correctness of RLIBM-32's float functions, use the following command:
+2. To test the correctness of RLIBM-32's posit32 functions, use the following command:
 ```
 cd <path-to-rlibm-32>
 make
 cd rlibmCorrectnessTest/posit32/
 ./runAllParallel.sh -j <parallelism>
 ```
-* Because the testing harness relies on MPFR math library to compute the correct result, the scripts can take hours to complete. In extreme case (exp10(x)), it can take up to 12 hours to complete. Since there are a total of 8 float functions, we recommend parallelism of at least 4.
+* Because the testing harness relies on MPFR math library to compute the correct result, the scripts can take hours to complete. In extreme case (exp10(x)), it can take up to 12 hours to complete. Since there are a total of 8 posit32 functions, we recommend parallelism of at least 4.
 
 * Once the testing harness is complete, the results will be stored in `rlibmCorrectnessTest/posit32/Results/rlibm/` directory. 
 
@@ -158,7 +158,7 @@ make
 ```
   * This step creates a number of <function name>Oracle files inside `ORACLEPATH`. Each oracle file is 16GB(4 bytes * 2^32) and there are 10 functions which requires a total of 160GB. This step will take roughly 1 hour.
 
-4. To generate oracle files for 32-bit float functions, 
+4. To generate oracle files for 32-bit posit functions, 
 ```
 export ORACLEPOSITPATH=<path to directory where you want to store oracle files for posit32 functions>
 cd <path to rlibm-32 directory>
