@@ -14,6 +14,30 @@ RLIBM-32 is both a math library that provides correctly rounded result for all i
 3. sinh(x), cosh(x)
 
 
+# Getting started with RLIBM-32:
+There are various pre-requisites for using RLIBM-32 math library, testing it, or generating polynomials.
+We describe the pre-requisites in each section. Alternatively, we have set up a docker image that contains the pre requisites and environment variables set up already. 
+
+### Using Docker Image
+1. Install docker if not already installed by following the installation documentation in this link: https://docs.docker.com/install/
+
+2. Download the docker image
+
+```
+docker pull jpl169/rlibm-32
+```
+* The docker image is roughly ~6GB in size
+
+3. Run the docker image
+	
+```
+sudo docker run -it jpl169/rlibm-32
+```
+
+### Manual Installation
+In each section (using math library, testing, generating polynomial) we list the pre-requisites and how to set up.
+
+
 # How to build and use RLIBM-32 math library
 
 ### Prerequisite
