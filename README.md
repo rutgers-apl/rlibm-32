@@ -87,6 +87,7 @@ make
 1. To test the correctness of RLIBM-32's float functions, use the following command:
 ```
 cd <path-to-rlibm-32>
+make
 cd rlibmCorrectnessTest/float/
 ./runAllParallel.sh -j <parallelism>
 ```
@@ -97,6 +98,7 @@ cd rlibmCorrectnessTest/float/
 2. To test the correctness of RLIBM-32's float functions, use the following command:
 ```
 cd <path-to-rlibm-32>
+make
 cd rlibmCorrectnessTest/posit32/
 ./runAllParallel.sh -j <parallelism>
 ```
@@ -143,7 +145,9 @@ export ICCPATH=<path to Intel oneAPI directory>
 ```
 export ORACLEPATH=<path to directory where you want to store oracle files for float functions>
 cd <path to rlibm-32 directory>
+make
 cd GenerateOracleFiles/float
+make
 ./runAll.sh
 ```
   * This step creates a number of <function name>Oracle files inside `ORACLEPATH`. Each oracle file is 16GB(4 bytes * 2^32) and there are 10 functions which requires a total of 160GB. This step will take roughly 1 hour.
@@ -152,7 +156,9 @@ cd GenerateOracleFiles/float
 ```
 export ORACLEPOSITPATH=<path to directory where you want to store oracle files for posit32 functions>
 cd <path to rlibm-32 directory>
+make
 cd GenerateOracleFiles/posit32
+make
 ./runAll.sh
 ```
   * This step creates a number of <function name>Oracle files inside `ORACLEPOSITPATH`. Each oracle file is 16GB(4 bytes * 2^32) and there are 9 functions which requires a total of 128GB. This step will take roughly 1 hour.
