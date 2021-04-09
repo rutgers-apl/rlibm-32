@@ -141,7 +141,13 @@ cd <path to intel oneAPI directory>
 export ICCPATH=<path to Intel oneAPI directory>
 ```
 
-2. To run the testing harness, we must first generate files containing oracle results. To generate oracle files for 32-bit float functions, 
+2. Build the math library
+
+cd <path-to-rlibm-32>
+
+make
+
+3. To run the testing harness, we must first generate files containing oracle results. To generate oracle files for 32-bit float functions, 
 ```
 export ORACLEPATH=<path to directory where you want to store oracle files for float functions>
 cd <path to rlibm-32 directory>
@@ -152,7 +158,7 @@ make
 ```
   * This step creates a number of <function name>Oracle files inside `ORACLEPATH`. Each oracle file is 16GB(4 bytes * 2^32) and there are 10 functions which requires a total of 160GB. This step will take roughly 1 hour.
 
-3. To generate oracle files for 32-bit float functions, 
+4. To generate oracle files for 32-bit float functions, 
 ```
 export ORACLEPOSITPATH=<path to directory where you want to store oracle files for posit32 functions>
 cd <path to rlibm-32 directory>
