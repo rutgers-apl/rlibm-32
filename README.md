@@ -1,6 +1,10 @@
 # RLIBM-32
 
-RLIBM-32 is both a math library that provides correctly rounded result for all inputs and tools used to generate the correct polynomials. The techniques behind the tools will be appearing at PLDI 2021. Currently, RLIBM-32 supports a number of elementary functions for float and posit32 representations. 
+RLIBM-32 is both a library that provides correctly rounded result for all inputs and a collection of tools used to generate the correct polynomials. 
+See the PLDI 2021 paper and its accompanying extended technical report at https://arxiv.org/pdf/2104.04043.pdf. 
+It extends our RLIBM work to work with 32-bit types. If you want to know more about RLIBM, see the POPL 2021 paper at https://www.cs.rutgers.edu/~santosh.nagarakatte/papers/rlibm-popl-2021.pdf
+
+Currently, RLIBM-32 supports a number of elementary functions for float and posit32 representations. 
 
 ### List of float functions supported by RLIBM-32
 1. log(x), log2(x), log10(x)
