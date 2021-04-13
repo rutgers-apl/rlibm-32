@@ -1,6 +1,10 @@
 # RLIBM-32
 
-RLIBM-32 is both a math library that provides correctly rounded result for all inputs and tools used to generate the correct polynomials. The techniques behind the tools will be appearing at PLDI 2021. Currently, RLIBM-32 supports a number of elementary functions for float and posit32 representations. 
+RLIBM-32 is both a library that provides correctly rounded result for all inputs and a collection of tools used to generate the correct polynomials. 
+See the PLDI 2021 paper and its accompanying extended technical report at https://arxiv.org/pdf/2104.04043.pdf. 
+It extends our RLIBM work to work with 32-bit types. If you want to know more about RLIBM, see the POPL 2021 paper at https://www.cs.rutgers.edu/~santosh.nagarakatte/papers/rlibm-popl-2021.pdf
+
+Currently, RLIBM-32 supports a number of elementary functions for float and posit32 representations. 
 
 ### List of float functions supported by RLIBM-32
 1. log(x), log2(x), log10(x)
@@ -12,6 +16,30 @@ RLIBM-32 is both a math library that provides correctly rounded result for all i
 1. log(x), log2(x), log10(x)
 2. exp(x), exp2(x), exp10(x)
 3. sinh(x), cosh(x)
+
+
+# Getting started with RLIBM-32:
+There are various pre-requisites for using RLIBM-32 math library, testing it, or generating polynomials.
+We describe the pre-requisites in each section. Alternatively, we have set up a docker image that contains the pre requisites and environment variables set up already. 
+
+### Using Docker Image
+1. Install docker if not already installed by following the installation documentation in this link: https://docs.docker.com/install/
+
+2. Download the docker image
+
+```
+docker pull jpl169/rlibm-32
+```
+* The docker image is roughly ~6GB in size
+
+3. Run the docker image
+	
+```
+sudo docker run -it jpl169/rlibm-32
+```
+
+### Manual Installation
+In each section (using math library, testing, generating polynomial) we list the pre-requisites and how to set up.
 
 
 # How to build and use RLIBM-32 math library
@@ -87,6 +115,7 @@ make
 1. To test the correctness of RLIBM-32's float functions, use the following command:
 ```
 cd <path-to-rlibm-32>
+make
 cd rlibmCorrectnessTest/float/
 ./runAllParallel.sh -j <parallelism>
 ```
@@ -94,13 +123,14 @@ cd rlibmCorrectnessTest/float/
 
 * Once the testing harness is complete, the results will be stored in `rlibmCorrectnessTest/float/Results/rlibm/` directory. 
 
-2. To test the correctness of RLIBM-32's float functions, use the following command:
+2. To test the correctness of RLIBM-32's posit32 functions, use the following command:
 ```
 cd <path-to-rlibm-32>
+make
 cd rlibmCorrectnessTest/posit32/
 ./runAllParallel.sh -j <parallelism>
 ```
-* Because the testing harness relies on MPFR math library to compute the correct result, the scripts can take hours to complete. In extreme case (exp10(x)), it can take up to 12 hours to complete. Since there are a total of 8 float functions, we recommend parallelism of at least 4.
+* Because the testing harness relies on MPFR math library to compute the correct result, the scripts can take hours to complete. In extreme case (exp10(x)), it can take up to 12 hours to complete. Since there are a total of 8 posit32 functions, we recommend parallelism of at least 4.
 
 * Once the testing harness is complete, the results will be stored in `rlibmCorrectnessTest/posit32/Results/rlibm/` directory. 
 
@@ -139,20 +169,30 @@ cd <path to intel oneAPI directory>
 export ICCPATH=<path to Intel oneAPI directory>
 ```
 
-2. To run the testing harness, we must first generate files containing oracle results. To generate oracle files for 32-bit float functions, 
+2. Build the math library
+
+cd <path-to-rlibm-32>
+
+make
+
+3. To run the testing harness, we must first generate files containing oracle results. To generate oracle files for 32-bit float functions, 
 ```
 export ORACLEPATH=<path to directory where you want to store oracle files for float functions>
 cd <path to rlibm-32 directory>
+make
 cd GenerateOracleFiles/float
+make
 ./runAll.sh
 ```
   * This step creates a number of <function name>Oracle files inside `ORACLEPATH`. Each oracle file is 16GB(4 bytes * 2^32) and there are 10 functions which requires a total of 160GB. This step will take roughly 1 hour.
 
-3. To generate oracle files for 32-bit float functions, 
+4. To generate oracle files for 32-bit posit functions, 
 ```
 export ORACLEPOSITPATH=<path to directory where you want to store oracle files for posit32 functions>
 cd <path to rlibm-32 directory>
+make
 cd GenerateOracleFiles/posit32
+make
 ./runAll.sh
 ```
   * This step creates a number of <function name>Oracle files inside `ORACLEPOSITPATH`. Each oracle file is 16GB(4 bytes * 2^32) and there are 9 functions which requires a total of 128GB. This step will take roughly 1 hour.
