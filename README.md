@@ -4,6 +4,8 @@ RLIBM-32 is both a library that provides correctly rounded result for all inputs
 See the PLDI 2021 paper and its accompanying extended technical report at https://arxiv.org/pdf/2104.04043.pdf. 
 It extends our RLIBM work to work with 32-bit types. If you want to know more about RLIBM, see the POPL 2021 paper at https://www.cs.rutgers.edu/~santosh.nagarakatte/papers/rlibm-popl-2021.pdf
 
+More details on the RLIBM project is available on the RLIBM project page at https://people.cs.rutgers.edu/~sn349/rlibm/
+
 Currently, RLIBM-32 supports a number of elementary functions for float and posit32 representations. 
 
 ### List of float functions supported by RLIBM-32
